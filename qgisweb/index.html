@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet.wms.js"></script>
+        <script src="data/PARCELA_1.js"></script>
+        <script src="data/CONSTRU_Z_2.js"></script>
+        <script src="data/Vegetacion_3.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[41.639318285864825,-0.9063003258957181],[41.64508755824288,-0.8929582097828657]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var layer_2018_pnoa_0 = L.WMS.layer("https://idearagon.aragon.es/AragonFotos", "2018_pnoa", {
+            format: 'image/png',
+            uppercase: true,
+            transparent: true,
+            continuousWorld : true,
+            tiled: true,
+            info_format: 'text/html',
+            opacity: 1,
+            identify: false,
+            attribution: '',
+        });
+        map.addLayer(layer_2018_pnoa_0);
+        function pop_PARCELA_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MAPA'] !== null ? Autolinker.link(String(feature.properties['MAPA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DELEGACIO'] !== null ? Autolinker.link(String(feature.properties['DELEGACIO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MUNICIPIO'] !== null ? Autolinker.link(String(feature.properties['MUNICIPIO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MASA'] !== null ? Autolinker.link(String(feature.properties['MASA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['HOJA'] !== null ? Autolinker.link(String(feature.properties['HOJA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TIPO'] !== null ? Autolinker.link(String(feature.properties['TIPO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PARCELA'] !== null ? Autolinker.link(String(feature.properties['PARCELA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COORX'] !== null ? Autolinker.link(String(feature.properties['COORX'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COORY'] !== null ? Autolinker.link(String(feature.properties['COORY'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['VIA'] !== null ? Autolinker.link(String(feature.properties['VIA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NUMERO'] !== null ? Autolinker.link(String(feature.properties['NUMERO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NUMERODUP'] !== null ? Autolinker.link(String(feature.properties['NUMERODUP'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NUMSYMBOL'] !== null ? Autolinker.link(String(feature.properties['NUMSYMBOL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA'] !== null ? Autolinker.link(String(feature.properties['AREA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FECHAALTA'] !== null ? Autolinker.link(String(feature.properties['FECHAALTA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FECHABAJA'] !== null ? Autolinker.link(String(feature.properties['FECHABAJA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NINTERNO'] !== null ? Autolinker.link(String(feature.properties['NINTERNO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PCAT1'] !== null ? Autolinker.link(String(feature.properties['PCAT1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PCAT2'] !== null ? Autolinker.link(String(feature.properties['PCAT2'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['EJERCICIO'] !== null ? Autolinker.link(String(feature.properties['EJERCICIO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NUM_EXP'] !== null ? Autolinker.link(String(feature.properties['NUM_EXP'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CONTROL'] !== null ? Autolinker.link(String(feature.properties['CONTROL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['REFCAT'] !== null ? Autolinker.link(String(feature.properties['REFCAT'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_PARCELA_1_0() {
+            return {
+                pane: 'pane_PARCELA_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,230,230,0.5019607843137255)',
+            }
+        }
+        map.createPane('pane_PARCELA_1');
+        map.getPane('pane_PARCELA_1').style.zIndex = 401;
+        map.getPane('pane_PARCELA_1').style['mix-blend-mode'] = 'normal';
+        var layer_PARCELA_1 = new L.geoJson(json_PARCELA_1, {
+            attribution: '',
+            pane: 'pane_PARCELA_1',
+            onEachFeature: pop_PARCELA_1,
+            style: style_PARCELA_1_0,
+        });
+        bounds_group.addLayer(layer_PARCELA_1);
+        map.addLayer(layer_PARCELA_1);
+        function pop_CONSTRU_Z_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MAPA'] !== null ? Autolinker.link(String(feature.properties['MAPA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DELEGACIO'] !== null ? Autolinker.link(String(feature.properties['DELEGACIO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MUNICIPIO'] !== null ? Autolinker.link(String(feature.properties['MUNICIPIO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MASA'] !== null ? Autolinker.link(String(feature.properties['MASA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PARCELA'] !== null ? Autolinker.link(String(feature.properties['PARCELA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['HOJA'] !== null ? Autolinker.link(String(feature.properties['HOJA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TIPO'] !== null ? Autolinker.link(String(feature.properties['TIPO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CONSTRU'] !== null ? Autolinker.link(String(feature.properties['CONSTRU'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COORX'] !== null ? Autolinker.link(String(feature.properties['COORX'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COORY'] !== null ? Autolinker.link(String(feature.properties['COORY'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NUMSYMBOL'] !== null ? Autolinker.link(String(feature.properties['NUMSYMBOL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA'] !== null ? Autolinker.link(String(feature.properties['AREA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FECHAALTA'] !== null ? Autolinker.link(String(feature.properties['FECHAALTA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FECHABAJA'] !== null ? Autolinker.link(String(feature.properties['FECHABAJA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NINTERNO'] !== null ? Autolinker.link(String(feature.properties['NINTERNO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PCAT1'] !== null ? Autolinker.link(String(feature.properties['PCAT1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PCAT2'] !== null ? Autolinker.link(String(feature.properties['PCAT2'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['EJERCICIO'] !== null ? Autolinker.link(String(feature.properties['EJERCICIO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NUM_EXP'] !== null ? Autolinker.link(String(feature.properties['NUM_EXP'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CONTROL'] !== null ? Autolinker.link(String(feature.properties['CONTROL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['REFCAT'] !== null ? Autolinker.link(String(feature.properties['REFCAT'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Altura'] !== null ? Autolinker.link(String(feature.properties['Altura'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Tipologia'] !== null ? Autolinker.link(String(feature.properties['Tipologia'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Edificio'] !== null ? Autolinker.link(String(feature.properties['Edificio'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Capacidad'] !== null ? Autolinker.link(String(feature.properties['Capacidad'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CONSTRU_Z_2_0(feature) {
+            switch(String(feature.properties['Tipologia'])) {
+                case 'Campo de Futbol':
+                    return {
+                pane: 'pane_CONSTRU_Z_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(25,125,231,1.0)',
+            }
+                    break;
+                case 'Estanque':
+                    return {
+                pane: 'pane_CONSTRU_Z_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(193,208,50,1.0)',
+            }
+                    break;
+                case 'JardÃ­n':
+                    return {
+                pane: 'pane_CONSTRU_Z_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(196,118,226,1.0)',
+            }
+                    break;
+                case 'Obras de urbanizaciÃ³n interior':
+                    return {
+                pane: 'pane_CONSTRU_Z_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(86,69,209,1.0)',
+            }
+                    break;
+                case 'Patio':
+                    return {
+                pane: 'pane_CONSTRU_Z_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(209,107,179,1.0)',
+            }
+                    break;
+                case 'SÃ³tano':
+                    return {
+                pane: 'pane_CONSTRU_Z_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(95,218,42,1.0)',
+            }
+                    break;
+                case 'SemisÃ³tano':
+                    return {
+                pane: 'pane_CONSTRU_Z_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(239,148,56,1.0)',
+            }
+                    break;
+                case 'Una altura':
+                    return {
+                pane: 'pane_CONSTRU_Z_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(65,236,119,1.0)',
+            }
+                    break;
+                case 'Zona deportiva':
+                    return {
+                pane: 'pane_CONSTRU_Z_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(55,234,219,1.0)',
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_CONSTRU_Z_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(181,131,136,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_CONSTRU_Z_2');
+        map.getPane('pane_CONSTRU_Z_2').style.zIndex = 402;
+        map.getPane('pane_CONSTRU_Z_2').style['mix-blend-mode'] = 'normal';
+        var layer_CONSTRU_Z_2 = new L.geoJson(json_CONSTRU_Z_2, {
+            attribution: '',
+            pane: 'pane_CONSTRU_Z_2',
+            onEachFeature: pop_CONSTRU_Z_2,
+            style: style_CONSTRU_Z_2_0,
+        });
+        bounds_group.addLayer(layer_CONSTRU_Z_2);
+        map.addLayer(layer_CONSTRU_Z_2);
+        function pop_Vegetacion_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? Autolinker.link(String(feature.properties['Id'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Altura'] !== null ? Autolinker.link(String(feature.properties['Altura'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Estado'] !== null ? Autolinker.link(String(feature.properties['Estado'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Tipo'] !== null ? Autolinker.link(String(feature.properties['Tipo'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Vegetacion_3_0(feature) {
+            switch(String(feature.properties['Tipo'])) {
+                case 'Arbolado conifera':
+                    return {
+                pane: 'pane_Vegetacion_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(199,250,178,1.0)',
+            }
+                    break;
+                case 'Arbolado frondosa':
+                    return {
+                pane: 'pane_Vegetacion_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,234,195,1.0)',
+            }
+                    break;
+                case 'HerbÃ¡cea':
+                    return {
+                pane: 'pane_Vegetacion_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(123,200,124,1.0)',
+            }
+                    break;
+                case 'Matorral':
+                    return {
+                pane: 'pane_Vegetacion_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(42,146,74,1.0)',
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_Vegetacion_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,68,27,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Vegetacion_3');
+        map.getPane('pane_Vegetacion_3').style.zIndex = 403;
+        map.getPane('pane_Vegetacion_3').style['mix-blend-mode'] = 'normal';
+        var layer_Vegetacion_3 = new L.geoJson(json_Vegetacion_3, {
+            attribution: '',
+            pane: 'pane_Vegetacion_3',
+            onEachFeature: pop_Vegetacion_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Vegetacion_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Vegetacion_3);
+        map.addLayer(layer_Vegetacion_3);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Vegetacion<br /><table><tr><td style="text-align: center;"><img src="legend/Vegetacion_3_Arboladoconifera0.png" /></td><td>Arbolado conifera</td></tr><tr><td style="text-align: center;"><img src="legend/Vegetacion_3_Arboladofrondosa1.png" /></td><td>Arbolado frondosa</td></tr><tr><td style="text-align: center;"><img src="legend/Vegetacion_3_HerbÃcea2.png" /></td><td>HerbÃ¡cea</td></tr><tr><td style="text-align: center;"><img src="legend/Vegetacion_3_Matorral3.png" /></td><td>Matorral</td></tr><tr><td style="text-align: center;"><img src="legend/Vegetacion_3_4.png" /></td><td></td></tr></table>': layer_Vegetacion_3,'CONSTRU_Z<br /><table><tr><td style="text-align: center;"><img src="legend/CONSTRU_Z_2_CampodeFutbol0.png" /></td><td>Campo de Futbol</td></tr><tr><td style="text-align: center;"><img src="legend/CONSTRU_Z_2_Estanque1.png" /></td><td>Estanque</td></tr><tr><td style="text-align: center;"><img src="legend/CONSTRU_Z_2_JardÃn2.png" /></td><td>JardÃ­n</td></tr><tr><td style="text-align: center;"><img src="legend/CONSTRU_Z_2_ObrasdeurbanizaciÃ³ninterior3.png" /></td><td>Obras de urbanizaciÃ³n interior</td></tr><tr><td style="text-align: center;"><img src="legend/CONSTRU_Z_2_Patio4.png" /></td><td>Patio</td></tr><tr><td style="text-align: center;"><img src="legend/CONSTRU_Z_2_SÃ³tano5.png" /></td><td>SÃ³tano</td></tr><tr><td style="text-align: center;"><img src="legend/CONSTRU_Z_2_SemisÃ³tano6.png" /></td><td>SemisÃ³tano</td></tr><tr><td style="text-align: center;"><img src="legend/CONSTRU_Z_2_Unaaltura7.png" /></td><td>Una altura</td></tr><tr><td style="text-align: center;"><img src="legend/CONSTRU_Z_2_Zonadeportiva8.png" /></td><td>Zona deportiva</td></tr><tr><td style="text-align: center;"><img src="legend/CONSTRU_Z_2_9.png" /></td><td></td></tr></table>': layer_CONSTRU_Z_2,'<img src="legend/PARCELA_1.png" /> PARCELA': layer_PARCELA_1,"2018_pnoa": layer_2018_pnoa_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
